@@ -1,22 +1,31 @@
 fn main() {
+    let s = String::from("hello world");
+    let w = first_word(&s);
+    println!("{}", w);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+
+fn dangle() -> String {
     let s = String::from("hello");
-    let s1 = s.clone();
-    
-    // take_ownership(s);
 
-    println!("{}", s);
-
-    let x = 5;
-
-    make_copy(x);
-
-    println!("{}", x);
+    s
 }
 
-fn take_ownership(str: String) {
-    println!("{}", str);
-}
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
 
-fn make_copy(int: i32) {
-    println!("{}", int);
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i]
+        }
+    }
+
+    &s[..]
 }
