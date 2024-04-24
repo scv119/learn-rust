@@ -90,7 +90,8 @@ fn maps() {
     scores.insert(String::from("Yellow"), 20);
 
     // let team_name = String::from("Blue");
-    let score = scores.get(&String::from("Blue")).unwrap_or(&0);
+    // let score = scores.get(&String::from("Blue")).unwrap_or(&0);
+    let score = scores.get(&String::from("Blue")).copied().unwrap_or(0);
     println!("score of Blue is {}",score);
 
     for (key, value) in &scores {
@@ -108,10 +109,22 @@ fn maps() {
     dbg!(&scores);
 }
 
+fn count_letters() {
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", map);
+}
+
 fn main() {
     println!("Hello, world!");
    // vectors();
    // enum_vecs();
     // test_strings();
-    maps();
+    // maps();
+    count_letters();
 }
